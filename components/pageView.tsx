@@ -1,20 +1,21 @@
 'use client'
-import { useRouter } from "next/router";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import * as gtag from '../app/gtag';
+import { pageview } from '../app/gtag';
 
 
 export const PageView = () => {
-  const router = useRouter()
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      gtag.pageview(url)
+    if (pathname) {
+      console.log(pathname);
+      pageview(pathname)
     }
-    router.events.on("routeChangeComplete", handleRouteChange)
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange)
-    }
-  }, [router.events])
+  }, [pathname, searchParams])
 
   return null;
+
 }

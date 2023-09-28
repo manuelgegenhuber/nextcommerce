@@ -1,10 +1,10 @@
 import { Carousel } from 'components/carousel';
 import { ThreeItemGrid } from 'components/grid/three-items';
 import Footer from 'components/layout/footer';
-import { PageView } from 'components/pageView';
 import { Suspense } from 'react';
 
 export default async function HomePage() {
+
   return (
     <>
       <ThreeItemGrid />
@@ -14,7 +14,6 @@ export default async function HomePage() {
           <Footer />
         </Suspense>
       </Suspense>
-      <PageView />
     </>
   );
 }
