@@ -19,6 +19,7 @@ export default function DeleteItemButton({ item }: { item: CartItem }) {
         startTransition(async () => {
           const error = await removeItem(item.id);
 
+
           analytics.events.fuqwqs({
             sku: item.id,
             product_name: item.merchandise.title,
