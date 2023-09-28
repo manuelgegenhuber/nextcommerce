@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import { removeItem } from 'components/cart/actions';
 import type { CartItem } from 'lib/shopify/types';
 import { useTransition } from 'react';
+import analytics from '../../app/gtag';
 
 export default function DeleteItemButton({ item }: { item: CartItem }) {
   const router = useRouter();
@@ -17,6 +18,15 @@ export default function DeleteItemButton({ item }: { item: CartItem }) {
       onClick={() => {
         startTransition(async () => {
           const error = await removeItem(item.id);
+
+          analytics.events.fuqwqs({
+            sku: item.id,
+            product_name: item.merchandise.title,
+            price: item.cost.totalAmount.amount,
+            quantity: item.quantity,
+            variation_type: item.merchandise.selectedOptions[0]?.value || '',
+          })
+
 
           if (error) {
             // Trigger the error boundary in the root error.js

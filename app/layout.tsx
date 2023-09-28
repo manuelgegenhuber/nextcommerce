@@ -52,25 +52,19 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <main>{children}</main>
           <PageView />
         </Suspense>
-        {process.env.NEXT_PUBLIC_VERCEL_ENV !== "production" ?
-          null
-          :
-          <>
-            <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
-            <Script id="gtag-init"
-              strategy="afterInteractive">
-              {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-   
-            gtag('config', '${gtag.GA_TRACKING_ID}', {
-              page_path: window.location.pathname,
-            });
-          `}
-            </Script>
-          </>
-        }
+        <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
+        <Script id="gtag-init"
+          strategy="afterInteractive">
+          {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+      
+                gtag('config', '${gtag.GA_TRACKING_ID}', {
+                  page_path: window.location.pathname,
+                });
+            `}
+        </Script>
       </body>
     </html>
   );

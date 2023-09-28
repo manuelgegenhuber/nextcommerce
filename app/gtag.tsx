@@ -8,17 +8,14 @@ export const pageview = (url: string) => {
 }
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
-interface IEventProps {
-  action: any;
-  category: string | undefined;
-  label: string | undefined;
-  value: number | undefined;
-}
 
-export const event = ({ action, category, label, value }: IEventProps) => {
-  window.gtag("event", action, {
-    event_category: category,
-    event_label: label,
-    value: value,
-  })
+export default {
+  pageview,
+  events: {
+    fuqwqs: (params: { sku: string, product_name: string, price: string, quantity: number, variation_type: string }) => {
+      window.gtag("event", 'remove_product', {
+        ...params
+      })
+    }
+  }
 }
