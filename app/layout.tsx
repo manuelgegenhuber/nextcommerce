@@ -33,6 +33,8 @@ export const metadata = {
   })
 };
 
+export const runtime = 'edge';
+
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
