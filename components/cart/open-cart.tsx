@@ -1,5 +1,8 @@
+'use client'
+
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+
 
 export default function OpenCart({
   className,

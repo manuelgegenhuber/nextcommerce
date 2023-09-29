@@ -4,14 +4,17 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { addItem } from 'components/cart/actions';
 import LoadingDots from 'components/loading-dots';
-import { ProductVariant } from 'lib/shopify/types';
+import { Product, ProductVariant } from 'lib/shopify/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
+import analytics from '../../app/gtag';
 
 export function AddToCart({
+  product,
   variants,
   availableForSale
 }: {
+  product: Product
   variants: ProductVariant[];
   availableForSale: boolean;
 }) {
@@ -28,8 +31,8 @@ export function AddToCart({
   const title = !availableForSale
     ? 'Out of stock'
     : !selectedVariantId
-    ? 'Please select options'
-    : undefined;
+      ? 'Please select options'
+      : undefined;
 
   return (
     <button
@@ -48,6 +51,12 @@ export function AddToCart({
             throw new Error(error.toString());
           }
 
+          analytics.events.berupq({
+            sku: product.id,
+            product_name: product.title,
+            price: `${product.priceRange.minVariantPrice.amount} - ${product.priceRange.maxVariantPrice.amount}`,
+            variation_type: selectedVariantId,
+          });
           router.refresh();
         });
       }}

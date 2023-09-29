@@ -3,6 +3,7 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { createUrl } from 'lib/utils';
 import { useRouter, useSearchParams } from 'next/navigation';
+import analytics from '../../../app/gtag';
 
 export default function Search() {
   const router = useRouter();
@@ -27,6 +28,9 @@ export default function Search() {
   return (
     <form onSubmit={onSubmit} className="w-max-[550px] relative w-full lg:w-80 xl:w-full">
       <input
+        onClick={() => {
+          analytics.events.davvny();
+        }}
         type="text"
         name="search"
         placeholder="Search for products..."

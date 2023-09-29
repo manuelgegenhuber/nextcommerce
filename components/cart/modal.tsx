@@ -9,6 +9,7 @@ import { createUrl } from 'lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useRef, useState } from 'react';
+import analytics from '../../app/gtag';
 import CloseCart from './close-cart';
 import DeleteItemButton from './delete-item-button';
 import EditItemQuantityButton from './edit-item-quantity-button';
@@ -39,7 +40,10 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
 
   return (
     <>
-      <button aria-label="Open cart" onClick={openCart}>
+      <button aria-label="Open cart" onClick={() => {
+        openCart()
+        analytics.events.pdsebd();
+      }}>
         <OpenCart quantity={cart?.totalQuantity} />
       </button>
       <Transition show={isOpen}>
@@ -106,7 +110,10 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                             </div>
                             <Link
                               href={merchandiseUrl}
-                              onClick={closeCart}
+                              onClick={() => {
+                                closeCart()
+                                analytics.events.xjgsbj();
+                              }}
                               className="z-30 flex flex-row space-x-4"
                             >
                               <div className="relative h-16 w-16 cursor-pointer overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
@@ -176,6 +183,13 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                   </div>
                   <a
                     href={cart.checkoutUrl}
+                    onClick={() => {
+                      analytics.events.bczmbw({
+                        list_size: cart.lines.length,
+                        price: cart.cost.totalAmount.amount,
+                        taxes: cart.cost.totalTaxAmount.amount
+                      });
+                    }}
                     className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
                   >
                     Proceed to Checkout
