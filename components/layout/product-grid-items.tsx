@@ -4,11 +4,25 @@ import Grid from 'components/grid';
 import { GridTileImage } from 'components/grid/tile';
 import { Product } from 'lib/shopify/types';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 import analytics from '../../app/gtag';
 
 export default function ProductGridItems({ products }: { products: Product[] }) {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    products.forEach((product) => {
+      analytics.events.sbqiby({
+        search_text: searchParams.get('q') || '',
+        product_name: product.title,
+        list_size: `${products.length}`,
+        sort_by_type: searchParams.get('sort') || 'relevance',
+        collection_type: pathname.split('/').pop() || '',
+      });
+    });
+  }, []);
 
   return (
     <>

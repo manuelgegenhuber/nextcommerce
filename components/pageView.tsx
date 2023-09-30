@@ -11,7 +11,6 @@ export const PageView = () => {
 
   useEffect(() => {
     if (pathname) {
-      console.log(pathname);
       analytics.pageview(pathname)
     }
   }, [pathname, searchParams])

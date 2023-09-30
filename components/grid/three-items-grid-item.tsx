@@ -3,6 +3,7 @@
 import { GridTileImage } from 'components/grid/tile';
 import type { Product } from 'lib/shopify/types';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import analytics from '../../app/gtag';
 
 const ThreeItemGridItem = ({
@@ -14,6 +15,14 @@ const ThreeItemGridItem = ({
   size: 'full' | 'half';
   priority?: boolean;
 }) => {
+
+  useEffect(() => {
+    analytics.events.ovhife({
+      sku: item.id,
+      product_name: item.title,
+    })
+  }, []);
+
   return (
     <div
       className={size === 'full' ? 'md:col-span-4 md:row-span-2' : 'md:col-span-2 md:row-span-1'}

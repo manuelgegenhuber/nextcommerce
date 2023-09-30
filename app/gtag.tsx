@@ -12,7 +12,7 @@ export const pageview = (url: string) => {
 export default {
   pageview,
   events: {
-    fuqwqs: (params: { sku: string, product_name: string, price: string, quantity: number, variation_type: string }) => {
+    fuqwqs: (params: { sku: string, product_name: string, price: string, quantity: string, variation_type: string }) => {
       window.gtag("event", 'click', {
         event_id: 'fuqwqs',
         element: 'remove_product',
@@ -96,12 +96,40 @@ export default {
         ...params
       });
     },
-    bczmbw: (params: { list_size: number, price: string, taxes: string }) => {
+    bczmbw: (params: { list_size: string, price: string, taxes: string }) => {
       window.gtag("event", 'click', {
         event_id: 'bczmbw',
         element: 'proceed_to_checkout',
         ...params
       });
-    }
+    },
+    ovhife: (params: { sku: string, product_name: string }) => {
+      window.gtag("event", 'block_view', {
+        event_id: 'ovhife',
+        element: 'new_products',
+        ...params
+      });
+    },
+    amqybp: (params: { sku: string, product_name: string, list_size: string }) => {
+      window.gtag("event", 'block_view', {
+        event_id: 'amqybp',
+        element: 'related_products',
+        ...params
+      });
+    },
+    gjsruk: (params: { sku: string, product_name: string, list_size: string }) => {
+      window.gtag("event", 'block_view', {
+        event_id: 'gjsruk',
+        element: 'best_sellers',
+        ...params
+      });
+    },
+    sbqiby: (params: { search_text: string, list_size: string, sort_by_type: string, collection_type: string, product_name: string, }) => {
+      window.gtag("event", 'block_view', {
+        event_id: 'sbqiby',
+        element: 'product_card',
+        ...params
+      });
+    },
   }
 }

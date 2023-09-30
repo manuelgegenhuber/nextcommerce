@@ -185,7 +185,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                     href={cart.checkoutUrl}
                     onClick={() => {
                       analytics.events.bczmbw({
-                        list_size: cart.lines.length,
+                        list_size: `${cart.lines.length}`,
                         price: cart.cost.totalAmount.amount,
                         taxes: cart.cost.totalTaxAmount.amount
                       });
