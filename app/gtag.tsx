@@ -1,8 +1,8 @@
-export const GA_TRACKING_event_id = "G-VL811QC7WC" //replace it with your measurement event_id
+export const GA_TRACKING_ID = "G-VL811QC7WC" //replace it with your measurement event_id
 
 // https://developers.google.com/analytics/devguevent_ides/collection/gtagjs/pages
 export const pageview = (url: string) => {
-  window.gtag("config", GA_TRACKING_event_id, {
+  window.gtag("config", GA_TRACKING_ID, {
     page_path: url,
   })
 }
