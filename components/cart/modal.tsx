@@ -9,7 +9,7 @@ import { createUrl } from 'lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useRef, useState } from 'react';
-import analytics from '../../app/gtag';
+import analytics from '../../app/analytics';
 import CloseCart from './close-cart';
 import DeleteItemButton from './delete-item-button';
 import EditItemQuantityButton from './edit-item-quantity-button';
@@ -42,7 +42,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
     <>
       <button aria-label="Open cart" onClick={() => {
         openCart()
-        analytics.events.pdsebd();
+        analytics.track.pdsebd();
       }}>
         <OpenCart quantity={cart?.totalQuantity} />
       </button>
@@ -112,7 +112,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                               href={merchandiseUrl}
                               onClick={() => {
                                 closeCart()
-                                analytics.events.xjgsbj();
+                                analytics.track.xjgsbj();
                               }}
                               className="z-30 flex flex-row space-x-4"
                             >
@@ -184,7 +184,7 @@ export default function CartModal({ cart }: { cart: Cart | undefined }) {
                   <a
                     href={cart.checkoutUrl}
                     onClick={() => {
-                      analytics.events.bczmbw({
+                      analytics.track.bczmbw({
                         list_size: `${cart.lines.length}`,
                         price: cart.cost.totalAmount.amount,
                         taxes: cart.cost.totalTaxAmount.amount

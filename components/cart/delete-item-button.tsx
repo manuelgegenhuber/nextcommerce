@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { removeItem } from 'components/cart/actions';
 import type { CartItem } from 'lib/shopify/types';
 import { useTransition } from 'react';
-import analytics from '../../app/gtag';
+import analytics from '../../app/analytics';
 
 export default function DeleteItemButton({ item }: { item: CartItem }) {
   const router = useRouter();
@@ -20,11 +20,11 @@ export default function DeleteItemButton({ item }: { item: CartItem }) {
           const error = await removeItem(item.id);
 
 
-          analytics.events.fuqwqs({
+          analytics.track.fuqwqs({
             sku: item.id,
             product_name: item.merchandise.title,
             price: item.cost.totalAmount.amount,
-            quantity: item.quantity,
+            quantity: item.quantity.toString(),
             variation_type: item.merchandise.selectedOptions[0]?.value || '',
           })
 

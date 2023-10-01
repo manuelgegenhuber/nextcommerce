@@ -6,7 +6,7 @@ import { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import analytics from '../../app/gtag';
+import analytics from '../../app/analytics';
 
 export default function ProductGridItems({ products }: { products: Product[] }) {
   const searchParams = useSearchParams();
@@ -14,7 +14,7 @@ export default function ProductGridItems({ products }: { products: Product[] }) 
 
   useEffect(() => {
     products.forEach((product) => {
-      analytics.events.sbqiby({
+      analytics.track.sbqiby({
         search_text: searchParams.get('q') || '',
         product_name: product.title,
         list_size: `${products.length}`,
@@ -32,7 +32,7 @@ export default function ProductGridItems({ products }: { products: Product[] }) 
             className="relative inline-block h-full w-full"
             href={`/product/${product.handle}`}
             onClick={() => {
-              analytics.events.przfbb({
+              analytics.track.przfbb({
                 search_text: searchParams.get('q') || '',
                 sku: product.id,
                 product_name: product.title,

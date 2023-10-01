@@ -1,6 +1,6 @@
 'use client';
 
-import analytics from 'app/gtag';
+import analytics from 'app/analytics';
 import clsx from 'clsx';
 import { SortFilterItem } from 'lib/constants';
 import { createUrl } from 'lib/utils';
@@ -22,7 +22,7 @@ function PathFilterItem({ item }: { item: PathFilterItem }) {
       className="mt-2 flex text-black dark:text-white"
       key={item.title}
       onClick={() => {
-        analytics.events.staraz({ collection_type: item.title })
+        analytics.track.staraz({ collection_type: item.title })
       }}>
       <DynamicTag
         href={createUrl(item.path, newParams)}
@@ -58,7 +58,7 @@ function SortFilterItem({ item }: { item: SortFilterItem }) {
       className="mt-2 flex text-sm text-black dark:text-white"
       key={item.title}
       onClick={() => {
-        analytics.events.ijzndb({ sort_by_type: item.title })
+        analytics.track.ijzndb({ sort_by_type: item.title })
       }}>
       <DynamicTag
         prefetch={!active ? false : undefined}

@@ -2,10 +2,9 @@ import Navbar from 'components/layout/navbar';
 import { PageView } from 'components/pageView';
 import { ensureStartsWith } from 'lib/utils';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
 import { ReactNode, Suspense } from 'react';
+import { AnalyticScript } from './analytics/analyticScript';
 import './globals.css';
-import * as gtag from './gtag';
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
@@ -52,19 +51,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <main>{children}</main>
           <PageView />
         </Suspense>
-        <Script strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`} />
-        <Script id="gtag-init"
-          strategy="afterInteractive">
-          {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-      
-                gtag('config', '${gtag.GA_TRACKING_ID}', {
-                  page_path: window.location.pathname,
-                });
-            `}
-        </Script>
+        <AnalyticScript />
       </body>
     </html>
   );

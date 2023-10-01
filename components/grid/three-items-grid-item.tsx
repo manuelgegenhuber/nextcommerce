@@ -4,7 +4,7 @@ import { GridTileImage } from 'components/grid/tile';
 import type { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 import { useEffect } from 'react';
-import analytics from '../../app/gtag';
+import analytics from '../../app/analytics';
 
 const ThreeItemGridItem = ({
   item,
@@ -17,7 +17,7 @@ const ThreeItemGridItem = ({
 }) => {
 
   useEffect(() => {
-    analytics.events.ovhife({
+    analytics.track.ovhife({
       sku: item.id,
       product_name: item.title,
     })
@@ -30,7 +30,7 @@ const ThreeItemGridItem = ({
       <Link className="relative block aspect-square h-full w-full"
         href={`/product/${item.handle}`}
         onClick={() => {
-          analytics.events.icicqg({
+          analytics.track.icicqg({
             sku: item.id,
             product_name: item.title,
             price: `${item.priceRange.minVariantPrice} - ${item.priceRange.maxVariantPrice}`

@@ -4,7 +4,7 @@ import { GridTileImage } from "components/grid/tile";
 import { Product } from "lib/shopify/types";
 import Link from "next/link";
 import { useEffect } from "react";
-import analytics from '../../gtag';
+import analytics from '../../analytics';
 
 interface IProps {
   relatedProducts: Product[]
@@ -15,7 +15,7 @@ const RelatedProductsView = ({ relatedProducts }: IProps) => {
 
   useEffect(() => {
     relatedProducts.forEach((product) => {
-      analytics.events.amqybp({
+      analytics.track.amqybp({
         sku: product.id,
         product_name: product.title,
         list_size: `${relatedProducts.length}`
@@ -36,7 +36,7 @@ const RelatedProductsView = ({ relatedProducts }: IProps) => {
               className="relative h-full w-full"
               href={`/product/${product.handle}`}
               onClick={(() => {
-                analytics.events.mkspxa({
+                analytics.track.mkspxa({
                   sku: product.id,
                   product_name: product.title,
                   price: `${product.priceRange.minVariantPrice.amount} - ${product.priceRange.maxVariantPrice.amount}`

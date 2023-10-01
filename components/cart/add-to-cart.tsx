@@ -7,7 +7,7 @@ import LoadingDots from 'components/loading-dots';
 import { Product, ProductVariant } from 'lib/shopify/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTransition } from 'react';
-import analytics from '../../app/gtag';
+import analytics from '../../app/analytics';
 
 export function AddToCart({
   product,
@@ -51,7 +51,7 @@ export function AddToCart({
             throw new Error(error.toString());
           }
 
-          analytics.events.berupq({
+          analytics.track.berupq({
             sku: product.id,
             product_name: product.title,
             price: `${product.priceRange.minVariantPrice.amount} - ${product.priceRange.maxVariantPrice.amount}`,

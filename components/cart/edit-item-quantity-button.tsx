@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 
 import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
-import analytics from 'app/gtag';
+import analytics from 'app/analytics';
 import clsx from 'clsx';
 import { removeItem, updateItemQuantity } from 'components/cart/actions';
 import LoadingDots from 'components/loading-dots';
@@ -40,7 +40,7 @@ export default function EditItemQuantityButton({
           }
 
           if (type === 'plus') {
-            analytics.events.ixtwas({
+            analytics.track.ixtwas({
               sku: item.id,
               product_name: item.merchandise.title,
               price: `${item.cost.totalAmount}`,
@@ -49,7 +49,7 @@ export default function EditItemQuantityButton({
           }
 
           if (type === 'minus') {
-            analytics.events.ixtwas({
+            analytics.track.ixtwas({
               sku: item.id,
               product_name: item.merchandise.title,
               price: `${item.cost.totalAmount}`,

@@ -4,7 +4,7 @@ import { GridTileImage } from 'components/grid/tile';
 import type { Product } from 'lib/shopify/types';
 import Link from 'next/link';
 import { useEffect } from 'react';
-import analytics from '../../app/gtag';
+import analytics from '../../app/analytics';
 
 interface IProps {
   products: Product[];
@@ -14,7 +14,7 @@ const CarouselView = ({ products }: IProps) => {
 
   useEffect(() => {
     products.forEach((product) => {
-      analytics.events.gjsruk({
+      analytics.track.gjsruk({
         sku: product.id,
         product_name: product.title,
         list_size: `${products.length}`
@@ -34,7 +34,7 @@ const CarouselView = ({ products }: IProps) => {
               href={`/product/${product.handle}`}
               className="relative h-full w-full"
               onClick={() => {
-                analytics.events.fhuhpd({
+                analytics.track.fhuhpd({
                   sku: product.id,
                   product_name: product.title,
                   price: `${product.priceRange.minVariantPrice} - ${product.priceRange.maxVariantPrice}`
