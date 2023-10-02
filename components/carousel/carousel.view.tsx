@@ -37,7 +37,7 @@ const CarouselView = ({ products }: IProps) => {
                 analytics.track.fhuhpd({
                   sku: product.id,
                   product_name: product.title,
-                  price: `${product.priceRange.minVariantPrice} - ${product.priceRange.maxVariantPrice}`
+                  price: `${product.priceRange.minVariantPrice.amount} - ${product.priceRange.maxVariantPrice.amount}`
                 });
               }}
             >
